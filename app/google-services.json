@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "950371333112",
+    "project_id": "vigilancia-app-90adc",
+    "storage_bucket": "vigilancia-app-90adc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950371333112:android:37aa6f05be9a6c5a661c0d",
+        "android_client_info": {
+          "package_name": "com.example.vigilancia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950371333112-2gjbmknarrkeha8p9m8g0jlccdf7jrno.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vigilancia",
+            "certificate_hash": "dc6c920317e8c7188718cbe16c4bfc200b0dce34"
+          }
+        },
+        {
+          "client_id": "950371333112-ak37e4ilqpbf6rparc0q18fer872hrjf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQUIQig9aH0GKGPUy-BHpnl1eXDufF6Hk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950371333112-ak37e4ilqpbf6rparc0q18fer872hrjf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

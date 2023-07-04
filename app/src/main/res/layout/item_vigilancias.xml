@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    \
+
+    <ImageView
+        android:id="@+id/ivPlantel"
+        android:layout_width="105dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@color/black" />
+
+    <TextView
+        android:id="@+id/tvNombrePlantel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toEndOf="@+id/ivPlantel"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Hola" />
+
+    <TextView
+        android:id="@+id/tvDirecion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/ivPlantel"
+        app:layout_constraintTop_toBottomOf="@+id/tvNombrePlantel"
+        tools:text="gAsgreqgdfgsdfg" />
+    <TextView
+        android:id="@+id/tvClave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/ivPlantel"
+        app:layout_constraintTop_toBottomOf="@+id/tvDirecion"
+        tools:text="001" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

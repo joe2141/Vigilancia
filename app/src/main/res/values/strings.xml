@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Vigilancia</string>
+    <string name="Password">Password</string>
+    <string name="Email">Email</string>
+    <string name="B_Entrar">Iniciar Sesion</string>
+    <string name="B_Salir">Cerrar Sesion</string>
+</resources>
