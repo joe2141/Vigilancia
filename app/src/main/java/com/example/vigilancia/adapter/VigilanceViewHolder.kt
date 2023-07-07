@@ -4,22 +4,18 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.vigilancia.R
+import com.bumptech.glide.Glide
 import com.example.vigilancia.VigilanciasProgramadas
+import com.example.vigilancia.databinding.ItemVigilanciasBinding
 
 
 class VigilanceViewHolder(view: View):RecyclerView.ViewHolder(view) {
 
-    val nombre = view.findViewById<TextView>(R.id.tvNombrePlantel)
-    val direccion = view.findViewById<TextView>(R.id.tvDirecion)
-    val clave = view.findViewById<TextView>(R.id.tvClave)
-    val photo = view.findViewById<ImageView>(R.id.ivPlantel)
-
+    val binding = ItemVigilanciasBinding.bind(view)
     fun render(vigilanceModal: VigilanciasProgramadas) {
-        nombre.text = vigilanceModal.institucion
-        direccion.text = vigilanceModal.direccion
-        clave.text = vigilanceModal.clave
-
-
+        binding.tvNombrePlantel.text = vigilanceModal.institucion
+        binding.tvDirecion.text = vigilanceModal.direccion
+        binding.tvClave.text = vigilanceModal.clave
+        Glide.with(binding.ivPlantel.context).load(vigilanceModal.photo).into(binding.ivPlantel)
     }
 }

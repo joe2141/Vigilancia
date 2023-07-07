@@ -7,17 +7,17 @@ class VigilanceProvider {
                 institucion = "Une",
                 direccion = "Av. Tonaltecas 332",
                 clave = "001",
-                photo = "https://tinyurl.com/4ytx6jm9"),
+                photo = "https://cdn.milenio.com/uploads/media/2020/09/02/une-tampico_0_23_1200_745.jpg"),
             VigilanciasProgramadas(
                 institucion = "Uteg",
                 direccion = "Av. Zapopan 2342",
                 clave = "002",
-                photo = "https://www.solili.mx/oficina/corporativo-mind-guadalajara-gdl/1862/"),
+                photo = "https://sic.cultura.gob.mx/images/63159"),
             VigilanciasProgramadas(
                 institucion = "SICYT",
                 direccion = "Av. Guadalajara 2350",
                 clave = "003",
-                photo = "https://assets.staging.bedu.org/UTEG/nosotros_planteles_campus_desk_d2d8935bc5.jpg"),
+                photo = "https://img.gruporeforma.com/imagenes/420x280/1/941/940342.jpg"),
         )
     }
 }
