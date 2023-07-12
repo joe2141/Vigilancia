@@ -4,6 +4,8 @@ import android.app.Activity
 import android.app.ActivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vigilancia.adapter.VigilanciaAdapter
@@ -19,9 +21,21 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         initRecyclerView()
     }
-    fun initRecyclerView(){
+    private fun initRecyclerView(){
 
-        binding.recyclerVigilancias.layoutManager = LinearLayoutManager(this)
-        binding.recyclerVigilancias.adapter = VigilanciaAdapter(VigilanceProvider.vigilanceList)
+        val manager = LinearLayoutManager(this)
+        val decoration = DividerItemDecoration(this, manager.orientation)
+        binding.recyclerVigilancias.layoutManager = manager
+        binding.recyclerVigilancias.adapter =
+            VigilanciaAdapter(VigilanceProvider.vigilanceList) { vigilance ->
+            onItemSelected(
+                vigilance
+            )
+        }
+        binding.recyclerVigilancias.addItemDecoration(decoration)
+    }
+
+    fun  onItemSelected(vigilance: VigilanciasProgramadas){
+        Toast.makeText(this, vigilance.direccion, Toast.LENGTH_SHORT).show()
     }
 }
