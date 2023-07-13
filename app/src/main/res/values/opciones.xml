@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="si_o_no">
+        <item>Si</item>
+        <item>No</item>
+    </string-array>
+
+</resources>

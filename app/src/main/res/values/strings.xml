@@ -4,4 +4,6 @@
     <string name="Email">Email</string>
     <string name="B_Entrar">Iniciar Sesion</string>
     <string name="B_Salir">Cerrar Sesion</string>
+    <string name="txt_valor1">Si</string>
+    <string name="txt_valor2">No</string>
 </resources>

@@ -1,15 +1,12 @@
 package com.example.vigilancia
-
-import android.app.Activity
-import android.app.ActivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.vigilancia.adapter.VigilanciaAdapter
 import com.example.vigilancia.databinding.ActivityHomeBinding
+import android.content.Intent
+
 
 class HomeActivity : AppCompatActivity() {
 
@@ -35,7 +32,13 @@ class HomeActivity : AppCompatActivity() {
         binding.recyclerVigilancias.addItemDecoration(decoration)
     }
 
-    fun  onItemSelected(vigilance: VigilanciasProgramadas){
-        Toast.makeText(this, vigilance.direccion, Toast.LENGTH_SHORT).show()
+    fun onItemSelected(vigilance: VigilanciasProgramadas) {
+        val intent = Intent(this, FormActivity::class.java)
+        // Puedes pasar datos adicionales a la actividad utilizando putExtra si es necesario
+        intent.putExtra("direccion", vigilance.direccion)
+        intent.putExtra("institucion", vigilance.institucion)
+        intent.putExtra("clave", vigilance.clave)
+        // Inicia la actividad OtraActivity
+        startActivity(intent)
     }
 }
