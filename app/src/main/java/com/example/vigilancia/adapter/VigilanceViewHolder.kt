@@ -17,7 +17,6 @@ class VigilanceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.tvNombrePlantel.text = vigilanceModal.institucion
         binding.tvDirecion.text = vigilanceModal.direccion
         binding.tvClave.text = vigilanceModal.clave
-        Glide.with(binding.ivPlantel.context).load(vigilanceModal.photo).into(binding.ivPlantel)
         itemView.setOnClickListener { onClickListener(vigilanceModal)}
     }
 }

@@ -2,61 +2,98 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="8dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    app:cardBackgroundColor="#FFFFFF">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/cv_soli"
+        android:layout_width="380dp"
+        android:layout_height="180dp">
 
         \
 
-        <ImageView
-            android:id="@+id/ivPlantel"
-            android:layout_width="144dp"
-            android:layout_height="138dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <TextView
+            android:id="@+id/tvClave"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/montserrat_thin"
+            android:text="SICYT.SES.DGIS.V0000"
+            android:textColor="#A19595"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:background="@color/black" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvNombrePlantel"
-            android:layout_width="wrap_content"
+            android:layout_width="272dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/black"
-            android:textSize="21sp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_thin"
+            android:text="Universidad Autonoma de Guadalajara"
+            android:textColor="#0282F8"
+            android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/ivPlantel"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Hola" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvClave" />
 
         <TextView
             android:id="@+id/tvDirecion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
-            app:layout_constraintStart_toEndOf="@+id/ivPlantel"
-            app:layout_constraintTop_toBottomOf="@+id/tvNombrePlantel"
-            tools:text="gAsgreqgdfgsdfg" />
+            android:fontFamily="@font/montserrat_thin"
+            android:text="Plantel XXXXX"
+            android:textColor="#5E5555"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvNombrePlantel" />
 
         <TextView
-            android:id="@+id/tvClave"
+            android:id="@+id/Txt_fecha_ins"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
-            app:layout_constraintStart_toEndOf="@+id/ivPlantel"
+            android:drawablePadding="10dp"
+            android:text="Fecha de Inspeccion"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDirecion" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="16dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toEndOf="@+id/Txt_fecha_ins"
             app:layout_constraintTop_toBottomOf="@+id/tvDirecion"
-            tools:text="001" />
+            app:srcCompat="@drawable/calendario" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="110dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bordered_edittext_background_blue"
+            android:fontFamily="@font/montserrat_thin"
+            android:lineSpacingExtra="8sp"
+            android:text="Nuevo"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/tvDirecion" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

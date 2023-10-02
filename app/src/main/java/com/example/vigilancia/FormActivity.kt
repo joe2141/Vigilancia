@@ -1,9 +1,9 @@
 package com.example.vigilancia
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+
 
 class FormActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,7 +12,7 @@ class FormActivity : AppCompatActivity() {
 
         val spinnerSpecialties = findViewById<Spinner>(R.id.multi)
         val optionsSpinner = arrayOf("Si", "No")
-        spinnerSpecialties.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, optionsSpinner)
+        spinnerSpecialties.adapter =
+            ArrayAdapter(this, android.R.layout.simple_list_item_1, optionsSpinner)
     }
-
 }

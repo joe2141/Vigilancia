@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/Res_1" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/Cam_1"
         android:layout_width="116dp"
         android:layout_height="42dp"
         android:layout_marginStart="10dp"
@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/Preg_2" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/Cam_2"
         android:layout_width="116dp"
         android:layout_height="42dp"
         android:layout_marginStart="10dp"
@@ -65,6 +65,48 @@
         android:text="Camera"
         app:layout_constraintStart_toEndOf="@+id/multi"
         app:layout_constraintTop_toBottomOf="@+id/Preg_2" />
+
+    <ImageView
+        android:id="@+id/Pho_1"
+        android:layout_width="60dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@+id/Cam_1"
+        app:layout_constraintTop_toBottomOf="@+id/Preg_1"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/Pho_2"
+        android:layout_width="60dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toEndOf="@+id/Cam_2"
+        app:layout_constraintTop_toBottomOf="@+id/Preg_2"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/Com_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:text="Comentarios"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/multi" />
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine"
+        android:layout_width="385dp"
+        android:layout_height="163dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Com_1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
