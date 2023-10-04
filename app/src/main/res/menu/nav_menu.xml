@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_editar"
+        android:icon="@drawable/icono_editar"
+        android:title="NUEVA"
+        />
+
+    <item
+        android:id="@+id/nav_proceso"
+        android:icon="@drawable/icono_proceso"
+        android:title="EN PROCESO"
+        />
+
+    <item
+        android:id="@+id/nav_completa"
+        android:icon="@drawable/icono_completa"
+        android:title="COMPLETA"
+        />
+</menu>

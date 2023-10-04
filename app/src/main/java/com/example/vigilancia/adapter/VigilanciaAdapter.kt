@@ -1,11 +1,10 @@
 package com.example.vigilancia.adapter
 
 import android.view.LayoutInflater
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vigilancia.R
-import com.example.vigilancia.VigilanciasProgramadas
+import com.example.vigilancia.Providers.VigilanciasProgramadas
 
 class VigilanciaAdapter(private val vigilanceList: List<VigilanciasProgramadas>, private val onClickListener: (VigilanciasProgramadas) -> Unit) : RecyclerView.Adapter<VigilanceViewHolder>() {
 

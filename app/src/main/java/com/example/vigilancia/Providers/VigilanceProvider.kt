@@ -1,4 +1,4 @@
-package com.example.vigilancia
+package com.example.vigilancia.Providers
 
 class VigilanceProvider {
     companion object{
