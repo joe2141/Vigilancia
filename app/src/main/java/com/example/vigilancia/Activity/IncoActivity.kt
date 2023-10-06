@@ -6,7 +6,10 @@ import android.widget.ImageButton
 import android.widget.RadioGroup
 import android.widget.Toolbar
 import com.example.vigilancia.R
+import com.example.vigilancia.fragmets.PreguntasFragmentoInco
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class IncoActivity : BaseActivity() {
 
@@ -23,9 +26,10 @@ class IncoActivity : BaseActivity() {
             // Tu acción para el botón de guardar
         }
 
-
-
-
+        val fragment = PreguntasFragmentoInco()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
 
 
 
