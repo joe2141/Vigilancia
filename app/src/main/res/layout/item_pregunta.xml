@@ -1,7 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tv_pregunta"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"/>
+    android:orientation="vertical"
+    android:padding="16dp">
 
+    <TextView
+        android:id="@+id/tv_pregunta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pregunta aquí" />
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <RadioButton
+            android:id="@+id/rb_si"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="SI" />
+
+        <RadioButton
+            android:id="@+id/rb_no"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="NO" />
+
+        <RadioButton
+            android:id="@+id/rb_na"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="N/A" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/edit_multiline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:hint="Introduce tu respuesta aquí"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/group_photo_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_capture_photo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tomar foto"/>
+
+        <Button
+            android:id="@+id/btn_view_photo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ver foto"/>
+    </LinearLayout>
+
+</LinearLayout>
