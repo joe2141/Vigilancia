@@ -1,5 +1,6 @@
 package com.example.vigilancia.fragmets
 
+import ApiService
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.vigilancia.Interfaz.ApiService
+//import com.example.vigilancia.Interfaz.ApiService
 import com.example.vigilancia.R
 import com.example.vigilancia.adapter.PreguntasAdapterInco
 import com.example.vigilancia.models.PreguntaResponse
@@ -40,7 +41,7 @@ class PreguntasFragmentoInco : Fragment() {
         return inflater.inflate(R.layout.fragment_preguntas_inco, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+   /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val apiService = ApiClient.instance
@@ -62,5 +63,5 @@ class PreguntasFragmentoInco : Fragment() {
                 Log.e("PreguntasFragment", "Error en la petición: ${t.message}")
             }
         })
-    }
+    }*/
 }
