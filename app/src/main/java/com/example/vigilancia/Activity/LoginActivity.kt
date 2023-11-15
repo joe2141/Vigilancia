@@ -5,6 +5,7 @@ import BaseActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -36,42 +37,56 @@ class LoginActivity : BaseActivity() {
             login(email, contrasena)
         }
     }
-
     private fun login(usuario: String, contrasena: String) {
         try {
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://siiges-services.2.ie-1.fl0.io")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+            val httpClient = OkHttpClient.Builder()
+                .addInterceptor { chain ->
+                    val original = chain.request()
+                    val request = original.newBuilder()
+                        .header("api_key", "zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx")
+                        .method(original.method(), original.body())
+                        .build()
+                    chain.proceed(request)
+                }
+                .build()
+
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://siiges-services.2.ie-1.fl0.io")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(httpClient)
+                .build()
 
         val service = retrofit.create(ApiService::class.java)
 
-        service.login(LoginBody(usuario, contrasena)).enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if (response.isSuccessful) {
-                    // Iniciar HomeActivity cuando el inicio de sesión es exitoso
-                    val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                    startActivity(intent)
-                    finish()  // Opcional: finalizar LoginActivity para que no se vuelva a ella al presionar 'Atrás'
-                } else {
-                    // Manejar respuesta no exitosa (mostrar mensaje de error, etc.)
-                    Toast.makeText(this@LoginActivity, "Inicio de sesión fallido: ${response.errorBody()?.string()}", Toast.LENGTH_LONG).show()
+            service.login(LoginBody(usuario, contrasena)).enqueue(object : Callback<LoginResponse> {
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                    if (response.isSuccessful) {
+                        Log.d("LoginActivity", "Inicio de sesión exitoso")
+                        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        val errorMessage = "Inicio de sesión fallido: ${response.errorBody()?.string()}"
+                        Log.e("LoginActivity", errorMessage)
+                        Toast.makeText(this@LoginActivity, errorMessage, Toast.LENGTH_LONG).show()
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                // Aquí manejas el fallo en la solicitud, como un error de conexión
-                Toast.makeText(this@LoginActivity, "Error al conectar: ${t.message}. Por favor, verifica tu conexión.", Toast.LENGTH_LONG).show()
-            }
-        })
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    val errorConnectionMessage = "Error al conectar: ${t.message}. Por favor, verifica tu conexión."
+                    Log.e("LoginActivity", errorConnectionMessage, t)
+                    Toast.makeText(this@LoginActivity, errorConnectionMessage, Toast.LENGTH_LONG).show()
+                }
+            })
         } catch (e: Exception) {
-            // Aquí manejas el error, por ejemplo, mostrando un Toast
+            val exceptionMessage = "Excepción al conectar: ${e.message}"
+            Log.e("LoginActivity", exceptionMessage, e)
             runOnUiThread {
-                Toast.makeText(this, "Error al conectar. Por favor, verifica tu conexión.", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, exceptionMessage, Toast.LENGTH_LONG).show()
             }
         }
     }
-    }
+}
 
 
 
