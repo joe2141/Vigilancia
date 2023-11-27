@@ -2,6 +2,7 @@ package com.example.vigilancia.Activity
 
 import ApiService
 import BaseActivity
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -37,6 +38,7 @@ class LoginActivity : BaseActivity() {
             login(email, contrasena)
         }
     }
+    @SuppressLint("SuspiciousIndentation")
     private fun login(usuario: String, contrasena: String) {
         try {
             val httpClient = OkHttpClient.Builder()
@@ -61,6 +63,9 @@ class LoginActivity : BaseActivity() {
             service.login(LoginBody(usuario, contrasena)).enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     if (response.isSuccessful) {
+                        response.body()?.let { loginResponse ->
+                            saveToken(loginResponse.token)
+                        }
                         Log.d("LoginActivity", "Inicio de sesión exitoso")
                         val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                         startActivity(intent)
@@ -86,7 +91,11 @@ class LoginActivity : BaseActivity() {
             }
         }
     }
+    private fun saveToken(token: String) {
+        val sharedPreferences = getSharedPreferences("Shared", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("token", token)
+        editor.apply()
+    }
 }
-
-
 

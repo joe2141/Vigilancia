@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.vigilancia.adapter.VigilanciaAdapter
 import com.example.vigilancia.databinding.ActivityHomeBinding
 import android.content.Intent
+import android.util.Log
 import com.example.vigilancia.AreasActivity
 import com.example.vigilancia.Providers.VigilanceProvider
 import com.example.vigilancia.Providers.VigilanciasProgramadas
@@ -23,6 +24,8 @@ class HomeActivity : BaseActivity() {
         setupActionBar()
         initRecyclerView()
 
+        printSavedToken()
+
     }
 
     private fun initRecyclerView(){
@@ -37,6 +40,12 @@ class HomeActivity : BaseActivity() {
             )
         }
         binding.recyclerVigilancias.addItemDecoration(decoration)
+    }
+
+    private fun printSavedToken() {
+        val sharedPreferences = getSharedPreferences("Shared", MODE_PRIVATE)
+        val token = sharedPreferences.getString("token", "No Token Found")
+        Log.d("HomeActivity", "Token obtenido: $token")
     }
 
     fun onItemSelected(vigilance: VigilanciasProgramadas) {
