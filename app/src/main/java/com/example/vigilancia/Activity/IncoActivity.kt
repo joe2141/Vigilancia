@@ -1,5 +1,6 @@
 package com.example.vigilancia.Activity
 import BaseActivity
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
@@ -32,7 +33,16 @@ class IncoActivity : BaseActivity() {
             .commit()
 
 
+    }
 
-
+    override fun onBackPressed() {
+        AlertDialog.Builder(this).apply {
+            setTitle("Confirmar salida")
+            setMessage("¿Estás seguro de que quieres salir? Cualquier cambio no guardado se perderá.")
+            setPositiveButton("Salir") { _, _ ->
+                super.onBackPressed()
+            }
+            setNegativeButton("Cancelar", null)
+        }.create().show()
     }
 }
