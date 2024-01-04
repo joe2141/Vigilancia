@@ -53,7 +53,7 @@ class LoginActivity : BaseActivity() {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://siiges-services.2.ie-1.fl0.io")
+                .baseUrl("https://6ee8-201-131-7-210.ngrok-free.app")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpClient)
                 .build()
@@ -64,12 +64,16 @@ class LoginActivity : BaseActivity() {
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     if (response.isSuccessful) {
                         response.body()?.let { loginResponse ->
-                            saveToken(loginResponse.token)
+                            if (loginResponse.data.rolId == 16) {
+                                saveToken(loginResponse.token)
+                                Log.d("LoginActivity", "Inicio de sesión exitoso")
+                                val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                Toast.makeText(this@LoginActivity, "Error: Usuario no es vigilante", Toast.LENGTH_LONG).show()
+                            }
                         }
-                        Log.d("LoginActivity", "Inicio de sesión exitoso")
-                        val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                        startActivity(intent)
-                        finish()
                     } else {
                         val errorMessage = "Inicio de sesión fallido: ${response.errorBody()?.string()}"
                         Log.e("LoginActivity", errorMessage)
