@@ -3,6 +3,7 @@ package com.example.vigilancia.Activity
 import ApiService
 import BaseActivity
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +14,7 @@ import android.widget.Toast
 import com.example.vigilancia.Data.LoginBody
 import com.example.vigilancia.R
 import com.example.vigilancia.models.LoginResponse
+import com.example.vigilancia.network.ApiManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,10 +25,14 @@ import okhttp3.OkHttpClient
 
 class LoginActivity : BaseActivity() {
 
+    private lateinit var apiManager: ApiManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         setupActionBar()
+
+        apiManager = ApiManager(this)
 
         val botonEntrar = findViewById<Button>(R.id.loginButton)
         val editTextEmail = findViewById<EditText>(R.id.email)
@@ -38,63 +44,29 @@ class LoginActivity : BaseActivity() {
             login(email, contrasena)
         }
     }
-    @SuppressLint("SuspiciousIndentation")
+
     private fun login(usuario: String, contrasena: String) {
-        try {
-            val httpClient = OkHttpClient.Builder()
-                .addInterceptor { chain ->
-                    val original = chain.request()
-                    val request = original.newBuilder()
-                        .header("api_key", "zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx")
-                        .method(original.method(), original.body())
-                        .build()
-                    chain.proceed(request)
-                }
-                .build()
-
-            val retrofit = Retrofit.Builder()
-                .baseUrl("https://6ee8-201-131-7-210.ngrok-free.app")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(httpClient)
-                .build()
-
-        val service = retrofit.create(ApiService::class.java)
-
-            service.login(LoginBody(usuario, contrasena)).enqueue(object : Callback<LoginResponse> {
-                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                    if (response.isSuccessful) {
-                        response.body()?.let { loginResponse ->
-                            if (loginResponse.data.rolId == 16) {
-                                saveToken(loginResponse.token)
-                                Log.d("LoginActivity", "Inicio de sesión exitoso")
-                                val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                                startActivity(intent)
-                                finish()
-                            } else {
-                                Toast.makeText(this@LoginActivity, "Error: Usuario no es vigilante", Toast.LENGTH_LONG).show()
-                            }
-                        }
+        apiManager.login(usuario, contrasena) { response ->
+            if (response.isSuccessful) {
+                response.body()?.let { loginResponse ->
+                    if (loginResponse.data.rolId == 16) {
+                        saveToken(loginResponse.token)
+                        Log.d("LoginActivity", "Inicio de sesión exitoso")
+                        val intent = Intent(this, HomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     } else {
-                        val errorMessage = "Inicio de sesión fallido: ${response.errorBody()?.string()}"
-                        Log.e("LoginActivity", errorMessage)
-                        Toast.makeText(this@LoginActivity, errorMessage, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Error: Usuario no es vigilante", Toast.LENGTH_LONG).show()
                     }
                 }
-
-                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    val errorConnectionMessage = "Error al conectar: ${t.message}. Por favor, verifica tu conexión."
-                    Log.e("LoginActivity", errorConnectionMessage, t)
-                    Toast.makeText(this@LoginActivity, errorConnectionMessage, Toast.LENGTH_LONG).show()
-                }
-            })
-        } catch (e: Exception) {
-            val exceptionMessage = "Excepción al conectar: ${e.message}"
-            Log.e("LoginActivity", exceptionMessage, e)
-            runOnUiThread {
-                Toast.makeText(this, exceptionMessage, Toast.LENGTH_LONG).show()
+            } else {
+                val errorMessage = "Inicio de sesión fallido: ${response.errorBody()?.string()}"
+                Log.e("LoginActivity", errorMessage)
+                Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
             }
         }
     }
+
     private fun saveToken(token: String) {
         val sharedPreferences = getSharedPreferences("Shared", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
