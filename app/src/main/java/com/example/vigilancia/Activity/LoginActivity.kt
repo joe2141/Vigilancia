@@ -51,8 +51,8 @@ class LoginActivity : BaseActivity() {
                 response.body()?.let { loginResponse ->
                     if (loginResponse.data.rolId == 16) {
                         saveToken(loginResponse.token)
-                        Log.d("LoginActivity", "Inicio de sesión exitoso")
                         val intent = Intent(this, HomeActivity::class.java)
+                        intent.putExtra("personaid", loginResponse.data.personaId)
                         startActivity(intent)
                         finish()
                     } else {
@@ -61,7 +61,6 @@ class LoginActivity : BaseActivity() {
                 }
             } else {
                 val errorMessage = "Inicio de sesión fallido: ${response.errorBody()?.string()}"
-                Log.e("LoginActivity", errorMessage)
                 Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
             }
         }
