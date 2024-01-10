@@ -12,5 +12,8 @@ interface ApiService {
     fun login(@Body loginBody: LoginBody): Call<LoginResponse>
 
     @GET("/api/v1/vigilancias/vigilante/{personaid}")
-    fun getVigilanciaByPersonaId(@Path("personaid") personaid: Int): Call<VigilanciaResponse>
+    fun getVigilanteidByPersonaId(@Path("personaid") personaid: Int): Call<VigilanciaResponse>
+
+    @GET("/api/v1/vigilancias/vigilanteVigilancias/{vigilanteid}")
+    fun getVigilanciaByVigilanteid(@Path("vigilanteid") vigilanteid: Int): Call<VigilanciaResponse>
 }

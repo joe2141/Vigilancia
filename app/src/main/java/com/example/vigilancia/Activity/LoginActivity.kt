@@ -1,26 +1,14 @@
 package com.example.vigilancia.Activity
 
-import ApiService
 import BaseActivity
-import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.example.vigilancia.Data.LoginBody
 import com.example.vigilancia.R
-import com.example.vigilancia.models.LoginResponse
 import com.example.vigilancia.network.ApiManager
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import okhttp3.OkHttpClient
+import com.example.vigilancia.utility.Shared
 
 
 class LoginActivity : BaseActivity() {
@@ -44,19 +32,19 @@ class LoginActivity : BaseActivity() {
             login(email, contrasena)
         }
     }
-
     private fun login(usuario: String, contrasena: String) {
         apiManager.login(usuario, contrasena) { response ->
             if (response.isSuccessful) {
                 response.body()?.let { loginResponse ->
                     if (loginResponse.data.rolId == 16) {
-                        saveToken(loginResponse.token)
+                        Shared.saveToken(this, loginResponse.token)
                         val intent = Intent(this, HomeActivity::class.java)
                         intent.putExtra("personaid", loginResponse.data.personaId)
                         startActivity(intent)
                         finish()
                     } else {
-                        Toast.makeText(this, "Error: Usuario no es vigilante", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Error: Usuario no es vigilante", Toast.LENGTH_LONG)
+                            .show()
                     }
                 }
             } else {
@@ -65,12 +53,4 @@ class LoginActivity : BaseActivity() {
             }
         }
     }
-
-    private fun saveToken(token: String) {
-        val sharedPreferences = getSharedPreferences("Shared", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("token", token)
-        editor.apply()
-    }
 }
-

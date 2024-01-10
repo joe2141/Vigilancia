@@ -19,7 +19,7 @@ import retrofit2.Response
 class HomeActivity : BaseActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-    private var personaid: Int = -1 // Un valor predeterminado si no se encuentra el personaid
+    private var personaid: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class HomeActivity : BaseActivity() {
                 if (response.isSuccessful) {
                     val vigilanciaData = response.body()?.data
                     Log.d("HomeActivity", "VigilanteID obtenido: ${vigilanciaData?.id}")
-                    // Aquí puedes actualizar tu UI con los datos recibidos
+                    Shared.saveVigilanteId(this, vigilanciaData?.id ?: -1)
                 } else {
                     Log.e("HomeActivity", "Error al obtener datos: ${response.errorBody()?.string()}")
                 }

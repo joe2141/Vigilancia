@@ -15,7 +15,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 class ApiManager(context: Context) {
     private val apiKey: String = context.getString(R.string.api_key)
     private val baseUrl: String = context.getString(R.string.base_url)
@@ -62,8 +61,20 @@ class ApiManager(context: Context) {
         })
     }
     fun getVigilanciaDetails(personaid: Int, callback: (Response<VigilanciaResponse>) -> Unit) {
-        service.getVigilanciaByPersonaId(personaid).enqueue(object : Callback<VigilanciaResponse> {
+        service.getVigilanteidByPersonaId(personaid).enqueue(object : Callback<VigilanciaResponse> {
             override fun onResponse(call: Call<VigilanciaResponse>, response: Response<VigilanciaResponse>) {
+                callback(response)
+            }
+
+            override fun onFailure(call: Call<VigilanciaResponse>, t: Throwable) {
+                Log.e("ApiManager", "Error en la llamada API", t)
+            }
+        })
+    }
+    fun getVigilanciaByVigilanteId(vigilanteId: Int, callback: (Response<VigilanciaResponse>) -> Unit) {
+        service.getVigilanciaByVigilanteid(vigilanteId).enqueue(object : Callback<VigilanciaResponse> {
+            override fun onResponse(call: Call<VigilanciaResponse>, response: Response<VigilanciaResponse>) {
+                Log.d("ApiManager", "Respuesta recibida: ${response.body()}")
                 callback(response)
             }
 
