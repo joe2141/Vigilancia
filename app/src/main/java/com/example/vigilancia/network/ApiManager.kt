@@ -6,7 +6,8 @@ import android.util.Log
 import com.example.vigilancia.Data.LoginBody
 import com.example.vigilancia.R
 import com.example.vigilancia.models.LoginResponse
-import com.example.vigilancia.models.VigilanciaResponse
+import com.example.vigilancia.models.VigilanciasResponse
+import com.example.vigilancia.models.VigilanteResponse
 import com.example.vigilancia.utility.Shared
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -60,28 +61,29 @@ class ApiManager(context: Context) {
             }
         })
     }
-    fun getVigilanciaDetails(personaid: Int, callback: (Response<VigilanciaResponse>) -> Unit) {
-        service.getVigilanteidByPersonaId(personaid).enqueue(object : Callback<VigilanciaResponse> {
-            override fun onResponse(call: Call<VigilanciaResponse>, response: Response<VigilanciaResponse>) {
+    fun getVigilanteDetails(personaid: Int, callback: (Response<VigilanteResponse>) -> Unit) {
+        service.getVigilanteidByPersonaId(personaid).enqueue(object : Callback<VigilanteResponse> {
+            override fun onResponse(call: Call<VigilanteResponse>, response: Response<VigilanteResponse>) {
                 callback(response)
             }
 
-            override fun onFailure(call: Call<VigilanciaResponse>, t: Throwable) {
-                Log.e("ApiManager", "Error en la llamada API", t)
-            }
-        })
-    }
-    fun getVigilanciaByVigilanteId(vigilanteId: Int, callback: (Response<VigilanciaResponse>) -> Unit) {
-        service.getVigilanciaByVigilanteid(vigilanteId).enqueue(object : Callback<VigilanciaResponse> {
-            override fun onResponse(call: Call<VigilanciaResponse>, response: Response<VigilanciaResponse>) {
-                Log.d("ApiManager", "Respuesta recibida: ${response.body()}")
-                callback(response)
-            }
-
-            override fun onFailure(call: Call<VigilanciaResponse>, t: Throwable) {
+            override fun onFailure(call: Call<VigilanteResponse>, t: Throwable) {
                 Log.e("ApiManager", "Error en la llamada API", t)
             }
         })
     }
 
+    fun getVigilanciasByVigilanteId(vigilanteId: Int, callback: (Response<VigilanciasResponse>) -> Unit) {
+        service.getVigilanciasByVigilanteId(vigilanteId).enqueue(object : Callback<VigilanciasResponse> {
+            override fun onResponse(call: Call<VigilanciasResponse>, response: Response<VigilanciasResponse>) {
+                callback(response)
+            }
+
+            override fun onFailure(call: Call<VigilanciasResponse>, t: Throwable) {
+                Log.e("ApiManager", "Error en la llamada API", t)
+            }
+        })
+    }
 }
+
+
