@@ -4,22 +4,31 @@ import BaseActivity
 import com.example.vigilancia.utility.Shared
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.vigilancia.R
+import com.example.vigilancia.adapter.VigilanciasAdapter
+import com.example.vigilancia.models.Vigilancia
 import com.example.vigilancia.network.ApiManager
 
 class HomeActivity : BaseActivity() {
 
     private var personaid: Int = -1
     private lateinit var apiManager: ApiManager
-
+    private lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        apiManager = ApiManager(this)
+        setContentView(R.layout.activity_home)
 
+        recyclerView = findViewById(R.id.recyclerVigilancias)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = VigilanciasAdapter(emptyList())
+
+        apiManager = ApiManager(this)
         personaid = intent.getIntExtra("personaid", -1)
         if (personaid != -1) {
             getVigilanteDetails(personaid)
         }
-
         getVigilanciasByVigilanteId()
     }
 
@@ -40,8 +49,10 @@ class HomeActivity : BaseActivity() {
         if (vigilanteId != -1) {
             apiManager.getVigilanciasByVigilanteId(vigilanteId) { response ->
                 if (response.isSuccessful) {
-                    val vigilancias = response.body()?.data
-                    Log.d("HomeActivity", "Vigilancias obtenidas: $vigilancias")
+                    val vigilanciasDetalle = response.body()?.data
+                    runOnUiThread {
+                        (recyclerView.adapter as? VigilanciasAdapter)?.updateData(vigilanciasDetalle ?: emptyList())
+                    }
                 } else {
                     Log.e("HomeActivity", "Error al obtener vigilancias: ${response.errorBody()?.string()}")
                 }
