@@ -3,8 +3,10 @@ package com.example.vigilancia.Activity
 import BaseActivity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.vigilancia.R
 import com.example.vigilancia.network.ApiManager
@@ -14,10 +16,12 @@ import com.example.vigilancia.utility.Shared
 class LoginActivity : BaseActivity() {
 
     private lateinit var apiManager: ApiManager
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        progressBar = findViewById(R.id.progressBarLogin)
         setupActionBar()
 
         apiManager = ApiManager(this)
@@ -33,7 +37,11 @@ class LoginActivity : BaseActivity() {
         }
     }
     private fun login(usuario: String, contrasena: String) {
+        progressBar.visibility = View.VISIBLE // Mostrar el ProgressBar
+
         apiManager.login(usuario, contrasena) { response ->
+            progressBar.visibility = View.GONE
+            apiManager.login(usuario, contrasena) { response ->
             if (response.isSuccessful) {
                 response.body()?.let { loginResponse ->
                     if (loginResponse.data.rolId == 16) {
@@ -53,4 +61,4 @@ class LoginActivity : BaseActivity() {
             }
         }
     }
-}
+}}

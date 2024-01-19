@@ -46,5 +46,6 @@ data class Programa(
     val calificacionDecimal: Boolean,
     val createdAt: String,
     val updatedAt: String?,
-    val deletedAt: String?
+    val deletedAt: String?,
+    val plantel: Plantel
 )

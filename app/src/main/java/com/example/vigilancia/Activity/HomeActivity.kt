@@ -4,6 +4,8 @@ import BaseActivity
 import com.example.vigilancia.utility.Shared
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vigilancia.R
@@ -16,10 +18,12 @@ class HomeActivity : BaseActivity() {
     private var personaid: Int = -1
     private lateinit var apiManager: ApiManager
     private lateinit var recyclerView: RecyclerView
+    private lateinit var progressBar: ProgressBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
+        progressBar = findViewById(R.id.progressBar)
         recyclerView = findViewById(R.id.recyclerVigilancias)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = VigilanciasAdapter(emptyList())
@@ -33,7 +37,11 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun getVigilanteDetails(personaid: Int) {
+        progressBar.visibility = View.VISIBLE // Mostrar el ProgressBar
+
         apiManager.getVigilanteDetails(personaid) { response ->
+            progressBar.visibility = View.GONE // Ocultar el ProgressBar
+
             if (response.isSuccessful) {
                 val vigilanciaData = response.body()?.data
                 Log.d("HomeActivity", "VigilanteID obtenido: ${vigilanciaData?.id}")
