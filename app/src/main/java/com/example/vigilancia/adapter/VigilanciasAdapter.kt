@@ -1,14 +1,19 @@
 package com.example.vigilancia.adapter
 
 import android.view.LayoutInflater
+import android.view.OnReceiveContentListener
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.vigilancia.Interfaz.OnVigilanciaClickListener
 import com.example.vigilancia.R
 import com.example.vigilancia.models.VigilanciaDetalle
 
-class VigilanciasAdapter(private var vigilancias: List<VigilanciaDetalle>) : RecyclerView.Adapter<VigilanciasAdapter.ViewHolder>() {
+class VigilanciasAdapter(
+    private var vigilancias: List<VigilanciaDetalle>,
+    private val listener: OnVigilanciaClickListener
+) : RecyclerView.Adapter<VigilanciasAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvClave: TextView = view.findViewById(R.id.tvClave)
@@ -18,20 +23,24 @@ class VigilanciasAdapter(private var vigilancias: List<VigilanciaDetalle>) : Rec
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_vigilancias, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_vigilancias, parent, false)
         return ViewHolder(view)
     }
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val vigilanciaDetalle = vigilancias[position]
+        holder.itemView.setOnClickListener {
+            listener.onVigilanciaClick(vigilanciaDetalle)
+        }
         holder.tvClave.text = vigilanciaDetalle.vigilancia.folio
-        holder.tvNombreInstitucion.text = vigilanciaDetalle.vigilancia.programa.plantel.institucion?.nombre
+        holder.tvNombreInstitucion.text =
+            vigilanciaDetalle.vigilancia.programa.plantel.institucion?.nombre
         holder.tvDirecion.text = vigilanciaDetalle.vigilancia.programa.plantel.domicilio?.calle
         holder.tvfecha.text = vigilanciaDetalle.vigilancia.fechaAsignada
-
-
-
     }
+
     fun updateData(newVigilancias: List<VigilanciaDetalle>) {
         this.vigilancias = newVigilancias
         notifyDataSetChanged()

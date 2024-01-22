@@ -21,10 +21,7 @@ class IncoActivity : BaseActivity() {
 
         val fabSave: FloatingActionButton = findViewById(R.id.fab_save)
 
-
-// Establece el listener para el botón flotante
         fabSave.setOnClickListener {
-            // Tu acción para el botón de guardar
         }
 
         val fragment = PreguntasFragmentoInco()

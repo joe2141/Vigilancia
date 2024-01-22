@@ -8,7 +8,7 @@
     <string name="txt_valor2">No</string>
     <string name="title_activity_areas">AreasActivity</string>
     <string name="api_key">zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx</string>
-    <string name="base_url">https://d8e5-201-131-7-210.ngrok-free.app</string>
+    <string name="base_url">https://c0b9-201-131-7-210.ngrok-free.app</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
