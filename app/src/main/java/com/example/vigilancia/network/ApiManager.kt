@@ -6,6 +6,7 @@ import android.util.Log
 import com.example.vigilancia.Data.LoginBody
 import com.example.vigilancia.R
 import com.example.vigilancia.models.LoginResponse
+import com.example.vigilancia.models.PreguntasResponse
 import com.example.vigilancia.models.VigilanciasResponse
 import com.example.vigilancia.models.VigilanteResponse
 import com.example.vigilancia.utility.Shared
@@ -22,21 +23,16 @@ class ApiManager(context: Context) {
     private val httpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->
             val original = chain.request()
-
-            // Obtener el token de las preferencias compartidas
             val token = Shared.getToken(context)
-
             val request = original.newBuilder()
                 .header("api_key", apiKey)
                 .apply {
-                    // Añadir el token Bearer si está disponible
                     token?.let {
                         header("Authorization", "Bearer $it")
                     }
                 }
                 .method(original.method(), original.body())
                 .build()
-
             chain.proceed(request)
         }
         .build()
@@ -48,7 +44,6 @@ class ApiManager(context: Context) {
         .build()
 
     private val service = retrofit.create(ApiService::class.java)
-
 
     fun login(usuario: String, contrasena: String, callback: (Response<LoginResponse>) -> Unit) {
         service.login(LoginBody(usuario, contrasena)).enqueue(object : Callback<LoginResponse> {
@@ -72,6 +67,10 @@ class ApiManager(context: Context) {
             }
         })
     }
+    fun getPreguntas(): Call<PreguntasResponse> {
+        return service.getPreguntas()
+    }
+
 
     fun getVigilanciasByVigilanteId(vigilanteId: Int, callback: (Response<VigilanciasResponse>) -> Unit) {
         service.getVigilanciasByVigilanteId(vigilanteId).enqueue(object : Callback<VigilanciasResponse> {

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 //import com.example.vigilancia.Interfaz.ApiService
 import com.example.vigilancia.R
 import com.example.vigilancia.adapter.PreguntasAdapterInco
-import com.example.vigilancia.models.PreguntaResponse
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

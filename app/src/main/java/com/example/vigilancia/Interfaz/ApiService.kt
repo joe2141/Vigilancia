@@ -1,5 +1,7 @@
 import com.example.vigilancia.Data.LoginBody
 import com.example.vigilancia.models.LoginResponse
+
+import com.example.vigilancia.models.PreguntasResponse
 import com.example.vigilancia.models.VigilanciasResponse
 import com.example.vigilancia.models.VigilanteResponse
 import retrofit2.Call
@@ -18,6 +20,10 @@ interface ApiService {
 
     @GET("/api/v1/vigilancias/vigilanteVigilancias/{vigilanteid}")
     fun getVigilanciasByVigilanteId(@Path("vigilanteid") vigilanteid: Int): Call<VigilanciasResponse>
+    @GET("/api/v1/vigilancias/preguntas")
+    fun getPreguntas(): Call<PreguntasResponse>
+
+
 
 }
 

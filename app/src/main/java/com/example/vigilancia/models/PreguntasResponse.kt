@@ -1,5 +1,5 @@
 package com.example.vigilancia.models
 
-data class PreguntaResponse(
-    val Preguntas: List<Pregunta>
+data class PreguntasResponse(
+    val data: List<Pregunta>
 )

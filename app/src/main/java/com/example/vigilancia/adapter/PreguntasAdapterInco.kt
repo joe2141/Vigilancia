@@ -31,10 +31,11 @@ class PreguntasAdapterInco (private val preguntas: List<Pregunta>) : RecyclerVie
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pregunta = preguntas[position]
-        Log.d("PreguntasAdapter", "Mostrando pregunta: ${pregunta.Pregunta}")
-        holder.tvPregunta.text = pregunta.Pregunta
+        Log.d("PreguntasAdapter", "Mostrando pregunta: ${pregunta.pregunta}")
 
-        when(pregunta.Tipo) {
+        // Comenta el código que configura las vistas si solo quieres loguear las preguntas por ahora
+        /*
+        when(pregunta.vigilanciaTipoPreguntaId) {
             1 -> {
                 holder.radioGroup.visibility = View.VISIBLE
                 holder.editMultiline.visibility = View.GONE
@@ -54,7 +55,9 @@ class PreguntasAdapterInco (private val preguntas: List<Pregunta>) : RecyclerVie
                 holder.btnViewPhoto.visibility = View.GONE
             }
         }
+        */
     }
+
 
 
 

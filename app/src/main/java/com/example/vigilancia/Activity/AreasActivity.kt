@@ -13,15 +13,10 @@ class AreasActivity : BaseActivity() {
         setContentView(R.layout.activity_areas)
         setupActionBar()
 
-
         val buttonIncorporacion: Button = findViewById(R.id.bt_Incorporacion)
-
-        // Establece un OnClickListener en el botón
         buttonIncorporacion.setOnClickListener {
-            // Crea un Intent para abrir IncoActivitya
-            val intent = Intent(this, IncoActivity::class.java)
 
-            // Inicia IncoActivity
+            val intent = Intent(this, IncoActivity::class.java)
             startActivity(intent)
         }
     }
