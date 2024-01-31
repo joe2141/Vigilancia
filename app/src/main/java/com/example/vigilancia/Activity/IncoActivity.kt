@@ -38,11 +38,9 @@ class IncoActivity : BaseActivity() {
         apiManager.getPreguntas().enqueue(object : Callback<PreguntasResponse> {
             override fun onResponse(call: Call<PreguntasResponse>, response: Response<PreguntasResponse>) {
                 if (response.isSuccessful) {
-                    // Ahora accedes a la lista de preguntas a través de response.body()?.data
                     val preguntas = response.body()?.data
                     if (preguntas != null) {
                         Log.d("IncoActivity", "Preguntas: $preguntas")
-                        // Aquí puedes hacer lo que necesites con la lista de preguntas
                     }
                 } else {
                     Log.e("IncoActivity", "Error en la respuesta del servidor")

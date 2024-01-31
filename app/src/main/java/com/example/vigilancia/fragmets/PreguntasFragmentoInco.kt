@@ -1,6 +1,5 @@
 package com.example.vigilancia.fragmets
 
-import ApiService
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,59 +8,50 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-//import com.example.vigilancia.Interfaz.ApiService
 import com.example.vigilancia.R
 import com.example.vigilancia.adapter.PreguntasAdapterInco
+import com.example.vigilancia.models.PreguntasResponse
+import com.example.vigilancia.network.ApiManager
 
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class PreguntasFragmentoInco : Fragment() {
 
-    object ApiClient {
-        private const val BASE_URL = "https://demo5296200.mockable.io/"
-
-        val instance: ApiService by lazy {
-            val retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-            retrofit.create(ApiService::class.java)
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        // Infla el layout para este fragmento
         return inflater.inflate(R.layout.fragment_preguntas_inco, container, false)
     }
 
-   /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val apiService = ApiClient.instance
+        // Encuentra el RecyclerView en el layout
         val recyclerView = view.findViewById<RecyclerView>(R.id.rv_preguntas)
-        recyclerView.layoutManager = LinearLayoutManager(context)  // Añade el LayoutManager aquí
+        // Configura el LinearLayoutManager para el RecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(context)
 
-        apiService.getPreguntas().enqueue(object: Callback<PreguntaResponse> {
-            override fun onResponse(call: Call<PreguntaResponse>, response: Response<PreguntaResponse>) {
+        // Obtiene la instancia de ApiManager para realizar llamadas a la API
+        val apiManager = ApiManager(requireContext())
+
+        // Realiza la llamada a la API para obtener las preguntas
+        apiManager.getPreguntas().enqueue(object : Callback<PreguntasResponse> {
+            override fun onResponse(call: Call<PreguntasResponse>, response: Response<PreguntasResponse>) {
                 if (response.isSuccessful) {
-                    val preguntas = response.body()?.Preguntas ?: emptyList()
-                    Log.d("PreguntasFragment", "Preguntas recibidas: $preguntas")
+                    // Obtiene la lista de preguntas de la respuesta
+                    val preguntas = response.body()?.data ?: emptyList()
+
+                    // Configura el RecyclerView con el adaptador, pasando la lista de preguntas
                     recyclerView.adapter = PreguntasAdapterInco(preguntas)
                 } else {
                     Log.e("PreguntasFragment", "Error en la respuesta: ${response.code()}")
                 }
             }
 
-            override fun onFailure(call: Call<PreguntaResponse>, t: Throwable) {
+            override fun onFailure(call: Call<PreguntasResponse>, t: Throwable) {
                 Log.e("PreguntasFragment", "Error en la petición: ${t.message}")
             }
         })
-    }*/
+    }
 }

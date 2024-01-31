@@ -14,7 +14,6 @@ import com.example.vigilancia.R
 import com.example.vigilancia.models.Pregunta
 
 class PreguntasAdapterInco (private val preguntas: List<Pregunta>) : RecyclerView.Adapter<PreguntasAdapterInco.ViewHolder>() {
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvPregunta: TextView = view.findViewById(R.id.tv_pregunta)
         val radioGroup: RadioGroup = view.findViewById(R.id.radio_group)
@@ -31,36 +30,28 @@ class PreguntasAdapterInco (private val preguntas: List<Pregunta>) : RecyclerVie
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pregunta = preguntas[position]
-        Log.d("PreguntasAdapter", "Mostrando pregunta: ${pregunta.pregunta}")
 
-        // Comenta el código que configura las vistas si solo quieres loguear las preguntas por ahora
-        /*
-        when(pregunta.vigilanciaTipoPreguntaId) {
-            1 -> {
+        // Asegúrate de que estás asignando el texto de la pregunta al TextView correctamente
+        holder.tvPregunta.text = pregunta.pregunta  // Usa pregunta.pregunta para obtener el texto real de la pregunta
+
+        // Configuración de la visibilidad de los elementos basada en el tipo de pregunta
+        when (pregunta.vigilanciaTipoPreguntaId) {
+            1 -> {  // SI/NO
                 holder.radioGroup.visibility = View.VISIBLE
                 holder.editMultiline.visibility = View.GONE
-                holder.btnCapturePhoto.visibility = View.GONE
-                holder.btnViewPhoto.visibility = View.GONE
-
             }
-            2 -> {
+            2 -> {  // Respuesta abierta, numérica, etc.
                 holder.radioGroup.visibility = View.GONE
                 holder.editMultiline.visibility = View.VISIBLE
-
             }
-            else -> {
+            else -> {  // Para cualquier otro tipo de pregunta no manejado específicamente
                 holder.radioGroup.visibility = View.GONE
                 holder.editMultiline.visibility = View.GONE
-                holder.btnCapturePhoto.visibility = View.GONE
-                holder.btnViewPhoto.visibility = View.GONE
             }
         }
-        */
+        holder.btnCapturePhoto.visibility = View.GONE
+        holder.btnViewPhoto.visibility = View.GONE
     }
-
-
-
-
-
     override fun getItemCount() = preguntas.size
+
 }
