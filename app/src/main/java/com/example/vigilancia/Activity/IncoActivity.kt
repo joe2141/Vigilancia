@@ -1,12 +1,8 @@
 package com.example.vigilancia.Activity
 import BaseActivity
 import android.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageButton
-import android.widget.RadioGroup
-import android.widget.Toolbar
 import com.example.vigilancia.R
 import com.example.vigilancia.fragmets.PreguntasFragmentoInco
 import com.example.vigilancia.models.PreguntasResponse
@@ -15,8 +11,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class IncoActivity : BaseActivity() {
 
@@ -34,14 +28,15 @@ class IncoActivity : BaseActivity() {
             fetchPreguntas()
     }
     private fun fetchPreguntas() {
+        val categoriaIdParaFiltrar: Int? = 1
+        val apartadoParaFiltrar: Int? = 1
+
         val apiManager = ApiManager(this)
-        apiManager.getPreguntas().enqueue(object : Callback<PreguntasResponse> {
+        apiManager.getPreguntas(vigilanciaCategoriaId = categoriaIdParaFiltrar, apartado = apartadoParaFiltrar).enqueue(object : Callback<PreguntasResponse> {
             override fun onResponse(call: Call<PreguntasResponse>, response: Response<PreguntasResponse>) {
                 if (response.isSuccessful) {
-                    val preguntas = response.body()?.data
-                    if (preguntas != null) {
-                        Log.d("IncoActivity", "Preguntas: $preguntas")
-                    }
+                    val preguntasFiltradasPorCategoria = response.body()?.data
+                    // Procesa las preguntas filtradas según la categoría
                 } else {
                     Log.e("IncoActivity", "Error en la respuesta del servidor")
                 }

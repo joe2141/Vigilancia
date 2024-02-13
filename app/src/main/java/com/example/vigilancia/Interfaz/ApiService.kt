@@ -9,6 +9,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -21,8 +22,10 @@ interface ApiService {
     @GET("/api/v1/vigilancias/vigilanteVigilancias/{vigilanteid}")
     fun getVigilanciasByVigilanteId(@Path("vigilanteid") vigilanteid: Int): Call<VigilanciasResponse>
     @GET("/api/v1/vigilancias/preguntas")
-    fun getPreguntas(): Call<PreguntasResponse>
-
+    fun getPreguntas(
+        @Query("vigilanciaCategoriaId") vigilanciaCategoriaId: Int?,
+        @Query("apartado") apartado: Int?
+    ): Call<PreguntasResponse>
 
 
 }

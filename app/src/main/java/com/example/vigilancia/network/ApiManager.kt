@@ -67,8 +67,9 @@ class ApiManager(context: Context) {
             }
         })
     }
-    fun getPreguntas(): Call<PreguntasResponse> {
-        return service.getPreguntas()
+    fun getPreguntas(vigilanciaCategoriaId: Int?, apartado: Int?): Call<PreguntasResponse> {
+        // Asegúrate de pasar los parámetros requeridos a la función getPreguntas de tu servicio
+        return service.getPreguntas(vigilanciaCategoriaId = vigilanciaCategoriaId, apartado = apartado)
     }
 
 

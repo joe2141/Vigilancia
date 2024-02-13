@@ -32,25 +32,24 @@ class PreguntasFragmentoInco : Fragment() {
         // Configura el LinearLayoutManager para el RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        // Obtiene la instancia de ApiManager para realizar llamadas a la API
         val apiManager = ApiManager(requireContext())
 
-        // Realiza la llamada a la API para obtener las preguntas
-        apiManager.getPreguntas().enqueue(object : Callback<PreguntasResponse> {
+        // Llamada a getPreguntas pasando 'null' para el parámetro 'apartado'
+        apiManager.getPreguntas(vigilanciaCategoriaId = 1, apartado = 1).enqueue(object : Callback<PreguntasResponse> {
             override fun onResponse(call: Call<PreguntasResponse>, response: Response<PreguntasResponse>) {
                 if (response.isSuccessful) {
-                    // Obtiene la lista de preguntas de la respuesta
+                    // Procesamiento de las preguntas filtradas
                     val preguntas = response.body()?.data ?: emptyList()
-
-                    // Configura el RecyclerView con el adaptador, pasando la lista de preguntas
+                    val recyclerView = view.findViewById<RecyclerView>(R.id.rv_preguntas)
+                    recyclerView.layoutManager = LinearLayoutManager(context)
                     recyclerView.adapter = PreguntasAdapterInco(preguntas)
                 } else {
-                    Log.e("PreguntasFragment", "Error en la respuesta: ${response.code()}")
+                    Log.e("TAG", "Error en la respuesta: ${response.code()}")
                 }
             }
 
             override fun onFailure(call: Call<PreguntasResponse>, t: Throwable) {
-                Log.e("PreguntasFragment", "Error en la petición: ${t.message}")
+                Log.e("TAG", "Error en la llamada al API", t)
             }
         })
     }
