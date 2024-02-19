@@ -25,27 +25,6 @@ class IncoActivity : BaseActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
-            fetchPreguntas()
-    }
-    private fun fetchPreguntas() {
-        val categoriaIdParaFiltrar: Int? = 1
-        val apartadoParaFiltrar: Int? = 1
-
-        val apiManager = ApiManager(this)
-        apiManager.getPreguntas(vigilanciaCategoriaId = categoriaIdParaFiltrar, apartado = apartadoParaFiltrar).enqueue(object : Callback<PreguntasResponse> {
-            override fun onResponse(call: Call<PreguntasResponse>, response: Response<PreguntasResponse>) {
-                if (response.isSuccessful) {
-                    val preguntasFiltradasPorCategoria = response.body()?.data
-                    // Procesa las preguntas filtradas según la categoría
-                } else {
-                    Log.e("IncoActivity", "Error en la respuesta del servidor")
-                }
-            }
-
-            override fun onFailure(call: Call<PreguntasResponse>, t: Throwable) {
-                Log.e("IncoActivity", "Error en la llamada al API", t)
-            }
-        })
     }
     override fun onBackPressed() {
         AlertDialog.Builder(this).apply {
