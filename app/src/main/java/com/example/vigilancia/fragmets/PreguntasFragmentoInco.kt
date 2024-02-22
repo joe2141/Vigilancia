@@ -12,7 +12,6 @@ import com.example.vigilancia.R
 import com.example.vigilancia.adapter.PreguntasAdapterInco
 import com.example.vigilancia.models.PreguntasResponse
 import com.example.vigilancia.network.ApiManager
-
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

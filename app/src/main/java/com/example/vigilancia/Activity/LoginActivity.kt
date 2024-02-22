@@ -12,7 +12,6 @@ import com.example.vigilancia.R
 import com.example.vigilancia.network.ApiManager
 import com.example.vigilancia.utility.Shared
 
-
 class LoginActivity : BaseActivity() {
 
     private lateinit var apiManager: ApiManager
@@ -21,6 +20,7 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
         progressBar = findViewById(R.id.progressBarLogin)
         setupActionBar()
 
@@ -31,28 +31,33 @@ class LoginActivity : BaseActivity() {
         val editTextContrasena = findViewById<EditText>(R.id.contraseña)
 
         botonEntrar.setOnClickListener {
-            val email = editTextEmail.text.toString()
-            val contrasena = editTextContrasena.text.toString()
-            login(email, contrasena)
+            val email = editTextEmail.text.toString().trim()
+            val contrasena = editTextContrasena.text.toString().trim()
+            if (email.isNotEmpty() && contrasena.isNotEmpty()) {
+                login(email, contrasena)
+            } else {
+                Toast.makeText(this, "Email y contraseña son requeridos", Toast.LENGTH_LONG).show()
+            }
         }
     }
+
     private fun login(usuario: String, contrasena: String) {
         progressBar.visibility = View.VISIBLE // Mostrar el ProgressBar
 
         apiManager.login(usuario, contrasena) { response ->
-            progressBar.visibility = View.GONE
-            apiManager.login(usuario, contrasena) { response ->
+            progressBar.visibility = View.GONE // Ocultar el ProgressBar independientemente de la respuesta
+
             if (response.isSuccessful) {
                 response.body()?.let { loginResponse ->
                     if (loginResponse.data.rolId == 16) {
                         Shared.saveToken(this, loginResponse.token)
-                        val intent = Intent(this, HomeActivity::class.java)
-                        intent.putExtra("personaid", loginResponse.data.personaId)
+                        val intent = Intent(this, HomeActivity::class.java).apply {
+                            putExtra("personaid", loginResponse.data.personaId)
+                        }
                         startActivity(intent)
                         finish()
                     } else {
-                        Toast.makeText(this, "Error: Usuario no es vigilante", Toast.LENGTH_LONG)
-                            .show()
+                        Toast.makeText(this, "Error: Usuario no es vigilante", Toast.LENGTH_LONG).show()
                     }
                 }
             } else {
@@ -61,4 +66,5 @@ class LoginActivity : BaseActivity() {
             }
         }
     }
-}}
+}
+
