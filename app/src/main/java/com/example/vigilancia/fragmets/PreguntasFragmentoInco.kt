@@ -1,5 +1,6 @@
 package com.example.vigilancia.fragmets
 
+import Pregunta
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,31 +26,16 @@ class PreguntasFragmentoInco : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Recupera las preguntas pasadas como argumento al fragmento
+        val preguntas = arguments?.getParcelableArrayList<Pregunta>("preguntas")
+        preguntas?.let {
+            setupRecyclerView(view, it)
+        }
+    }
 
-        // Encuentra el RecyclerView en el layout
+    private fun setupRecyclerView(view: View, preguntas: List<Pregunta>) {
         val recyclerView = view.findViewById<RecyclerView>(R.id.rv_preguntas)
-        // Configura el LinearLayoutManager para el RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
-
-        val apiManager = ApiManager(requireContext())
-
-        // Llamada a getPreguntas pasando 'null' para el parámetro 'apartado'
-        apiManager.getPreguntas(vigilanciaCategoriaId = 1, apartado = 1).enqueue(object : Callback<PreguntasResponse> {
-            override fun onResponse(call: Call<PreguntasResponse>, response: Response<PreguntasResponse>) {
-                if (response.isSuccessful) {
-                    // Procesamiento de las preguntas filtradas
-                    val preguntas = response.body()?.data ?: emptyList()
-                    val recyclerView = view.findViewById<RecyclerView>(R.id.rv_preguntas)
-                    recyclerView.layoutManager = LinearLayoutManager(context)
-                    recyclerView.adapter = PreguntasAdapterInco(preguntas)
-                } else {
-                    Log.e("TAG", "Error en la respuesta: ${response.code()}")
-                }
-            }
-
-            override fun onFailure(call: Call<PreguntasResponse>, t: Throwable) {
-                Log.e("TAG", "Error en la llamada al API", t)
-            }
-        })
+        recyclerView.adapter = PreguntasAdapterInco(preguntas)
     }
 }

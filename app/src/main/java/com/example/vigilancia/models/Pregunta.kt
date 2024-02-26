@@ -1,5 +1,7 @@
-package com.example.vigilancia.models
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Pregunta(
     val id: Int,
     val vigilanciaTipoPreguntaId: Int,
@@ -12,4 +14,4 @@ data class Pregunta(
     val createdAt: String,
     val updatedAt: String?,
     val deletedAt: String?
-)
+): Parcelable

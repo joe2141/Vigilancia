@@ -1,5 +1,6 @@
 package com.example.vigilancia.adapter
 
+import Pregunta
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vigilancia.R
-import com.example.vigilancia.models.Pregunta
+
 
 class PreguntasAdapterInco (private val preguntas: List<Pregunta>) : RecyclerView.Adapter<PreguntasAdapterInco.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
