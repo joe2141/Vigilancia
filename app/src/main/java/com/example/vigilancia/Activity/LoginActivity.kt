@@ -27,17 +27,17 @@ class LoginActivity : BaseActivity() {
         apiManager = ApiManager(this)
 
         val botonEntrar = findViewById<Button>(R.id.loginButton)
-        val editTextEmail = findViewById<EditText>(R.id.email)
+        val editTextUsuario = findViewById<EditText>(R.id.usuario) // Cambio de ID
         val editTextContrasena = findViewById<EditText>(R.id.contraseña)
 
         botonEntrar.setOnClickListener {
-            val email = editTextEmail.text.toString().trim()
+            val usuario = editTextUsuario.text.toString().trim() // Uso de usuario
             val contrasena = editTextContrasena.text.toString().trim()
-            if (email.isNotEmpty() && contrasena.isNotEmpty()) {
+            if (usuario.isNotEmpty() && contrasena.isNotEmpty()) {
                 showProgressBar() // Mostrar el ProgressBar antes de iniciar el login
-                login(email, contrasena)
+                login(usuario, contrasena)
             } else {
-                Toast.makeText(this, "Email y contraseña son requeridos", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Usuario y contraseña son requeridos", Toast.LENGTH_LONG).show() // Mensaje actualizado
             }
         }
     }

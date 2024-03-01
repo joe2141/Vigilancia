@@ -22,7 +22,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/sicyt_grises" />
+            app:srcCompat="@drawable/sicyt_grises"
+            android:contentDescription="@string/image_description"
+            />
+
 
         <TextView
             android:id="@+id/TxtLogin"
@@ -32,7 +35,7 @@
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/montserrat_thin"
             android:lineSpacingExtra="8sp"
-            android:text="Sistema integral de información para la gestión de educación superior"
+            android:text="@string/system_description"
             android:textAlignment="center"
             android:textColor="#A19595"
             android:textSize="14sp"
@@ -72,15 +75,15 @@
                     android:layout_marginTop="36dp"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="sans-serif"
-                    android:text="Iniciar Sesión"
+                    android:text="@string/login_title"
                     android:textSize="34sp"
-                    app:layout_constraintBottom_toTopOf="@+id/email"
+                    app:layout_constraintBottom_toTopOf="@+id/usuario"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/email"
+                    android:id="@+id/usuario"
                     style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
                     android:layout_width="269dp"
                     android:layout_height="48dp"
@@ -102,7 +105,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/sesion"
-                    android:background="@drawable/bordered_edittext_background" />
+                    android:background="@drawable/bordered_edittext_background"
+                    android:autofillHints="username" />
 
                 <EditText
                     android:id="@+id/contraseña"
@@ -125,8 +129,9 @@
                     app:layout_constraintBottom_toTopOf="@+id/loginButton"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/email"
-                    android:background="@drawable/bordered_edittext_background" />
+                    app:layout_constraintTop_toBottomOf="@+id/usuario"
+                    android:background="@drawable/bordered_edittext_background"
+                    android:autofillHints="password" />
 
                 <Button
                     android:id="@+id/loginButton"
