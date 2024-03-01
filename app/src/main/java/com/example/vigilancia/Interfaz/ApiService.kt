@@ -14,7 +14,8 @@ import retrofit2.http.Query
 interface ApiService {
 
     @POST("/api/v1/auth/login")
-    fun login(@Body loginBody: LoginBody): Call<LoginResponse>
+    suspend fun login(@Body loginBody: LoginBody): LoginResponse
+
 
     @GET("/api/v1/vigilancias/vigilante/{personaid}")
     fun getVigilanteidByPersonaId(@Path("personaid") personaid: Int): Call<VigilanteResponse>

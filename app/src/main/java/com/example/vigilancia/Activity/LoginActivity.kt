@@ -11,6 +11,10 @@ import android.widget.Toast
 import com.example.vigilancia.R
 import com.example.vigilancia.network.ApiManager
 import com.example.vigilancia.utility.Shared
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
 
 class LoginActivity : BaseActivity() {
 
@@ -43,28 +47,33 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun login(usuario: String, contrasena: String) {
-        apiManager.login(usuario, contrasena) { response ->
-            hideProgressBar() // Ocultar el ProgressBar independientemente de la respuesta
-
-            if (response.isSuccessful) {
-                response.body()?.let { loginResponse ->
-                    if (loginResponse.data.rolId == 16) {
-                        Shared.saveToken(this, loginResponse.token)
-                        val intent = Intent(this, HomeActivity::class.java).apply {
-                            putExtra("personaid", loginResponse.data.personaId)
-                        }
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        Toast.makeText(this, "Error: Usuario no es vigilante", Toast.LENGTH_LONG).show()
+        CoroutineScope(Dispatchers.Main).launch {
+            showProgressBar()
+            try {
+                val response = apiManager.login(usuario, contrasena)
+                if (response != null) {
+                    // Manejar la respuesta exitosa aquí.
+                    Shared.saveToken(this@LoginActivity, response.token)
+                    val intent = Intent(this@LoginActivity, HomeActivity::class.java).apply {
+                        putExtra("personaid", response.personaId)
                     }
+                    startActivity(intent)
+                    finish()
+                } else {
+                    // Mostrar un mensaje de error.
+                    Toast.makeText(this@LoginActivity, "Error en el inicio de sesión", Toast.LENGTH_LONG).show()
                 }
-            } else {
-                val errorMessage = "Inicio de sesión fallido: ${response.errorBody()?.string()}"
-                Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+            } catch (e: Exception) {
+                Toast.makeText(this@LoginActivity, "Error en el inicio de sesión: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
+            } finally {
+                hideProgressBar()
             }
         }
     }
+
+
+
+
 
     private fun showProgressBar() {
         progressBar.visibility = View.VISIBLE

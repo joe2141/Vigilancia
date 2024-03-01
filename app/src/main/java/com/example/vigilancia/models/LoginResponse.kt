@@ -1,6 +1,7 @@
 package com.example.vigilancia.models
 
 data class LoginResponse(
-    val data: UserData,
-    val token: String
+    val token: String,
+    val personaId: Int,
+    val rolId: Int
 )
