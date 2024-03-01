@@ -34,6 +34,7 @@ class LoginActivity : BaseActivity() {
             val email = editTextEmail.text.toString().trim()
             val contrasena = editTextContrasena.text.toString().trim()
             if (email.isNotEmpty() && contrasena.isNotEmpty()) {
+                showProgressBar() // Mostrar el ProgressBar antes de iniciar el login
                 login(email, contrasena)
             } else {
                 Toast.makeText(this, "Email y contraseña son requeridos", Toast.LENGTH_LONG).show()
@@ -42,10 +43,8 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun login(usuario: String, contrasena: String) {
-        progressBar.visibility = View.VISIBLE // Mostrar el ProgressBar
-
         apiManager.login(usuario, contrasena) { response ->
-            progressBar.visibility = View.GONE // Ocultar el ProgressBar independientemente de la respuesta
+            hideProgressBar() // Ocultar el ProgressBar independientemente de la respuesta
 
             if (response.isSuccessful) {
                 response.body()?.let { loginResponse ->
@@ -66,5 +65,12 @@ class LoginActivity : BaseActivity() {
             }
         }
     }
-}
 
+    private fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        progressBar.visibility = View.GONE
+    }
+}
