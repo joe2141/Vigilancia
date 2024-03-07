@@ -16,17 +16,15 @@ interface ApiService {
     @POST("/api/v1/auth/login")
     suspend fun login(@Body loginBody: LoginBody): LoginResponse
 
-
     @GET("/api/v1/vigilancias/vigilante/{personaid}")
-    fun getVigilanteidByPersonaId(@Path("personaid") personaid: Int): Call<VigilanteResponse>
+    suspend fun getVigilanteidByPersonaId(@Path("personaid") personaid: Int): VigilanteResponse
 
     @GET("/api/v1/vigilancias/vigilanteVigilancias/{vigilanteid}")
-    fun getVigilanciasByVigilanteId(@Path("vigilanteid") vigilanteid: Int): Call<VigilanciasResponse>
+    suspend fun getVigilanciasByVigilanteId(@Path("vigilanteid") vigilanteid: Int): VigilanciasResponse
+
     @GET("/api/v1/vigilancias/preguntas")
-    fun getPreguntas(
+    suspend fun getPreguntas(
         @Query("vigilanciaCategoriaId") vigilanciaCategoriaId: Int?,
         @Query("apartado") apartado: Int?
-    ): Call<PreguntasResponse>
-
-
+    ): PreguntasResponse
 }

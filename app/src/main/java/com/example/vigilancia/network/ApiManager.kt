@@ -52,34 +52,32 @@ class ApiManager(private val context: Context) {
         }
     }
 
-    fun getVigilanteDetails(personaid: Int, callback: (Response<VigilanteResponse>) -> Unit) {
-        service.getVigilanteidByPersonaId(personaid).enqueue(object : Callback<VigilanteResponse> {
-            override fun onResponse(call: Call<VigilanteResponse>, response: Response<VigilanteResponse>) {
-                callback(response)
-            }
-
-            override fun onFailure(call: Call<VigilanteResponse>, t: Throwable) {
-                Log.e("ApiManager", "Error en la llamada API", t)
-            }
-        })
+    suspend fun getVigilanteDetails(personaid: Int): VigilanteResponse? {
+        return try {
+            service.getVigilanteidByPersonaId(personaid)
+        } catch (e: Exception) {
+            Log.e("ApiManager", "Error: ${e.localizedMessage}")
+            null
+        }
     }
-    fun getPreguntas(vigilanciaCategoriaId: Int?, apartado: Int?): Call<PreguntasResponse> {
-        // Asegúrate de pasar los parámetros requeridos a la función getPreguntas de tu servicio
-        return service.getPreguntas(vigilanciaCategoriaId = vigilanciaCategoriaId, apartado = apartado)
+    suspend fun getPreguntas(vigilanciaCategoriaId: Int?, apartado: Int?): PreguntasResponse? {
+        return try {
+            service.getPreguntas(vigilanciaCategoriaId, apartado)
+        } catch (e: Exception) {
+            Log.e("ApiManager", "Error al obtener preguntas: ${e.localizedMessage}")
+            null
+        }
     }
 
-
-    fun getVigilanciasByVigilanteId(vigilanteId: Int, callback: (Response<VigilanciasResponse>) -> Unit) {
-        service.getVigilanciasByVigilanteId(vigilanteId).enqueue(object : Callback<VigilanciasResponse> {
-            override fun onResponse(call: Call<VigilanciasResponse>, response: Response<VigilanciasResponse>) {
-                callback(response)
-            }
-
-            override fun onFailure(call: Call<VigilanciasResponse>, t: Throwable) {
-                Log.e("ApiManager", "Error en la llamada API", t)
-            }
-        })
-    }}
+    suspend fun getVigilanciasByVigilanteId(vigilanteId: Int): VigilanciasResponse? {
+        return try {
+            service.getVigilanciasByVigilanteId(vigilanteId)
+        } catch (e: Exception) {
+            Log.e("ApiManager", "Error al obtener vigilancias: ${e.localizedMessage}")
+            null
+        }
+    }
+}
 
 
 
