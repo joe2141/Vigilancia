@@ -1,4 +1,4 @@
-package com.example.vigilancia.Activity
+package com.example.vigilancia.activity
 
 import BaseActivity
 import Pregunta
@@ -8,7 +8,6 @@ import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.example.vigilancia.R
 import com.example.vigilancia.fragmets.PreguntasFragmentoInco
-import com.example.vigilancia.models.PreguntasResponse
 import com.example.vigilancia.network.ApiManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
@@ -28,7 +27,7 @@ class IncoActivity : BaseActivity() {
         apiManager = ApiManager(this)
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomNavigation.setOnNavigationItemSelectedListener { item ->
+        bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.btnAnterior -> {
                     if (apartadoActualId > 1) {

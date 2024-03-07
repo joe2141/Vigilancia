@@ -22,7 +22,7 @@
         android:networkSecurityConfig="@xml/network_security_config">
 
         <!-- Splash Screen Activity -->
-        <activity android:name=".Activity.Splash_Screen"
+        <activity android:name=".activity.Splash_Screen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,16 +33,16 @@
 
         <!-- Other Activities -->
         <activity
-            android:name=".Activity.IncoActivity"
+            android:name=".activity.IncoActivity"
             android:exported="false" />
         <activity
             android:name=".AreasActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.HomeActivity"
+            android:name=".activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:exported="true" />
 
     </application>

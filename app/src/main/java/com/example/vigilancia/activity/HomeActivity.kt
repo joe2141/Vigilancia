@@ -1,4 +1,4 @@
-package com.example.vigilancia.Activity
+package com.example.vigilancia.activity
 
 import BaseActivity
 import android.content.Intent
@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +14,6 @@ import com.example.vigilancia.AreasActivity
 import com.example.vigilancia.Interfaz.OnVigilanciaClickListener
 import com.example.vigilancia.R
 import com.example.vigilancia.adapter.VigilanciasAdapter
-import com.example.vigilancia.models.Vigilancia
 import com.example.vigilancia.models.VigilanciaDetalle
 import com.example.vigilancia.network.ApiManager
 import kotlinx.coroutines.launch

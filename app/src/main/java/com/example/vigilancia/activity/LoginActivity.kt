@@ -1,4 +1,4 @@
-package com.example.vigilancia.Activity
+package com.example.vigilancia.activity
 
 import BaseActivity
 import android.content.Intent
