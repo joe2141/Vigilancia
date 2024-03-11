@@ -11,7 +11,7 @@
     <string name="title_activity_areas">AreasActivity</string>
     <string name="api_key">zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx</string>
     <string name="base_url">
-https://6eb1-201-131-130-234.ngrok-free.app
+    https://92b0-201-131-130-234.ngrok-free.app
     </string>
     <string name="image_description">Logo_Innovation</string>
 
@@ -20,6 +20,11 @@ https://6eb1-201-131-130-234.ngrok-free.app
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="question_here">Pregunta aquí</string>
+    <string name="yes">SI</string>
+    <string name="no">NO</string>
+    <string name="na">N/A</string>
+    <string name="enter_your_answer_here">Introduce tu respuesta aquí</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
