@@ -49,8 +49,8 @@ class HomeActivity : BaseActivity(), OnVigilanciaClickListener {
 
             if (response != null) {
                 val vigilanciaData = response.data
-                Log.d("HomeActivity", "VigilanteID obtenido: ${vigilanciaData?.id}")
-                Shared.saveVigilanteId(this@HomeActivity, vigilanciaData?.id ?: -1)
+                Log.d("HomeActivity", "VigilanteID obtenido: ${vigilanciaData.id}") // Corregido
+                Shared.saveVigilanteId(this@HomeActivity, vigilanciaData.id) // Corregido
             } else {
                 Log.e("HomeActivity", "Error al obtener datos")
             }
@@ -58,27 +58,33 @@ class HomeActivity : BaseActivity(), OnVigilanciaClickListener {
     }
 
     override fun onVigilanciaClick(vigilanciaDetalle: VigilanciaDetalle) {
+        // Guardamos el vigilanciaId en las preferencias compartidas
+        Shared.saveVigilanciaId(this, vigilanciaDetalle.id)
+
         // Aquí manejas el clic en un ítem de Vigilancia
         val intent = Intent(this, AreasActivity::class.java)
         // Puedes poner extras en el intent si necesitas pasar información a AreasActivity
+        intent.putExtra("vigilanciaId", vigilanciaDetalle.id) // Pasamos el vigilanciaId a la siguiente actividad
         startActivity(intent)
     }
+
     private fun getVigilanciasByVigilanteId() {
         val vigilanteId = Shared.getVigilanteId(this)
         if (vigilanteId != -1) {
             lifecycleScope.launch {
                 try {
                     val response = apiManager.getVigilanciasByVigilanteId(vigilanteId)
-                    response?.let { vigilanciasDetalle ->
-                        (recyclerView.adapter as? VigilanciasAdapter)?.updateData(vigilanciasDetalle.data ?: emptyList())
+                    if (response != null) {
+                        Log.d("HomeActivity", "Respuesta obtenida: $response")
+                        (recyclerView.adapter as? VigilanciasAdapter)?.updateData(response.data) // Corregido
+                    } else {
+                        Log.d("HomeActivity", "Respuesta nula recibida del servidor")
                     }
                 } catch (e: Exception) {
                     Log.e("HomeActivity", "Error al obtener vigilancias: ${e.message}")
                 }
             }
-        } else {
-            Log.e("HomeActivity", "Vigilante ID no encontrado en las preferencias compartidas")
-        }
+            }
     }
 }
 
