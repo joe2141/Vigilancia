@@ -20,11 +20,13 @@ class IncoActivity : BaseActivity() {
     private var apartadoActualId = 1
     private val apartados = 4
     private val preguntasCache = hashMapOf<Int, List<Pregunta>>() // Define preguntasCache aquí
+    private var vigilanciaId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inco)
         setupActionBar()
+        vigilanciaId = intent.getIntExtra("vigilanciaId", -1)
 
         apiManager = ApiManager(this)
 
@@ -54,15 +56,24 @@ class IncoActivity : BaseActivity() {
         cargarPreguntas(apartadoActualId)
     }
 
-    private fun mostrarComentariosDelApartado(apartadoId: Int) {
+    fun guardarComentarios(vigilanciaId: Int, apartadoId: Int, textoComentarios: String) {
         val sharedPreferences = getSharedPreferences("PreferenciasComentarios", Context.MODE_PRIVATE)
-        val comentarios = sharedPreferences.getString("comentarios_$apartadoId", "")
+        with(sharedPreferences.edit()) {
+            putString("comentarios_${vigilanciaId}_$apartadoId", textoComentarios)
+            apply()
+        }
+    }
+
+    private fun mostrarComentariosDelApartado(vigilanciaId: Int, apartadoId: Int) {
+        val sharedPreferences = getSharedPreferences("PreferenciasComentarios", Context.MODE_PRIVATE)
+        val comentarios = sharedPreferences.getString("comentarios_${vigilanciaId}_$apartadoId", "")
         findViewById<EditText>(R.id.editTextComentarios).setText(comentarios)
     }
 
     private fun cambiarApartado(nuevoApartado: Int) {
+        guardarComentarios(vigilanciaId, apartadoActualId, findViewById<EditText>(R.id.editTextComentarios).text.toString())
         apartadoActualId = nuevoApartado
-        mostrarComentariosDelApartado(apartadoActualId)
+        mostrarComentariosDelApartado(vigilanciaId, apartadoActualId)
         cargarPreguntas(apartadoActualId)
     }
 
@@ -126,12 +137,11 @@ class IncoActivity : BaseActivity() {
 
     override fun onPause() {
         super.onPause()
-        val comentarios = findViewById<EditText>(R.id.editTextComentarios).text.toString()
-        guardarComentarios(apartadoActualId, comentarios)
+        guardarComentarios(vigilanciaId, apartadoActualId, findViewById<EditText>(R.id.editTextComentarios).text.toString())
     }
     override fun onResume() {
         super.onResume()
-        mostrarComentariosDelApartado(apartadoActualId)
+        mostrarComentariosDelApartado(vigilanciaId,apartadoActualId)
     }
 
 }
