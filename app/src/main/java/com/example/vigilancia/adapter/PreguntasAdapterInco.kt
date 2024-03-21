@@ -13,7 +13,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vigilancia.R
 
-class PreguntasAdapterInco(private val context: Context, private val preguntas: List<Pregunta>) : RecyclerView.Adapter<PreguntasAdapterInco.ViewHolder>() {
+class PreguntasAdapterInco(private val context: Context, private val preguntas: List<Pregunta>, private val vigilanciaId: Int) : RecyclerView.Adapter<PreguntasAdapterInco.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvPregunta: TextView = view.findViewById(R.id.tv_pregunta)
@@ -73,7 +73,7 @@ class PreguntasAdapterInco(private val context: Context, private val preguntas: 
     }
 
     private fun guardarRespuesta(preguntaId: Int, respuesta: String) {
-        val sharedPreferences = context.getSharedPreferences("PreguntasRespuestas", Context.MODE_PRIVATE)
+        val sharedPreferences = context.getSharedPreferences("PreguntasRespuestas_$vigilanciaId", Context.MODE_PRIVATE)
         with(sharedPreferences.edit()) {
             putString("Respuesta_$preguntaId", respuesta)
             apply()
@@ -81,7 +81,7 @@ class PreguntasAdapterInco(private val context: Context, private val preguntas: 
     }
 
     private fun obtenerRespuesta(preguntaId: Int): String {
-        val sharedPreferences = context.getSharedPreferences("PreguntasRespuestas", Context.MODE_PRIVATE)
+        val sharedPreferences = context.getSharedPreferences("PreguntasRespuestas_$vigilanciaId", Context.MODE_PRIVATE)
         return sharedPreferences.getString("Respuesta_$preguntaId", "") ?: ""
     }
 

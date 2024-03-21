@@ -19,17 +19,16 @@ class PreguntasFragmentoInco : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Recupera las preguntas pasadas como argumento al fragmento
         val preguntas = arguments?.getParcelableArrayList<Pregunta>("preguntas")
+        val vigilanciaId = arguments?.getInt("vigilanciaId", -1) ?: -1
         preguntas?.let {
-            setupRecyclerView(view, it)
+            setupRecyclerView(view, it, vigilanciaId)
         }
     }
 
-    private fun setupRecyclerView(view: View, preguntas: List<Pregunta>) {
+    private fun setupRecyclerView(view: View, preguntas: List<Pregunta>, vigilanciaId: Int) {
         val recyclerView = view.findViewById<RecyclerView>(R.id.rv_preguntas)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        // Aquí corregimos el error pasando primero el contexto
-        recyclerView.adapter = context?.let { PreguntasAdapterInco(it, preguntas) }
+        recyclerView.adapter = context?.let { PreguntasAdapterInco(it, preguntas, vigilanciaId) }
     }
 }

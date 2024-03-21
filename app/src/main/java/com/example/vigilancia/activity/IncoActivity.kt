@@ -78,6 +78,7 @@ class IncoActivity : BaseActivity() {
         val fragment = PreguntasFragmentoInco().apply {
             arguments = Bundle().apply {
                 putParcelableArrayList("preguntas", ArrayList(preguntas))
+                putInt("vigilanciaId", intent.getIntExtra("vigilanciaId", -1))
             }
         }
         supportFragmentManager.beginTransaction()
