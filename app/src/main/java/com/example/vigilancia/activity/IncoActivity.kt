@@ -3,8 +3,10 @@ package com.example.vigilancia.activity
 import BaseActivity
 import Pregunta
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.widget.EditText
 import androidx.lifecycle.lifecycleScope
 import com.example.vigilancia.R
 import com.example.vigilancia.fragmets.PreguntasFragmentoInco
@@ -28,6 +30,8 @@ class IncoActivity : BaseActivity() {
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigation.setOnItemSelectedListener { item ->
+            val comentarios = findViewById<EditText>(R.id.editTextComentarios).text.toString()
+            guardarComentarios(apartadoActualId, comentarios)
             when (item.itemId) {
                 R.id.btnAnterior -> {
                     if (apartadoActualId > 1) {
@@ -36,7 +40,9 @@ class IncoActivity : BaseActivity() {
                     true
                 }
                 R.id.btnSiguiente -> {
+                    val comentariosText = findViewById<EditText>(R.id.editTextComentarios).text.toString()
                     if (apartadoActualId < apartados) {
+                        guardarComentarios(apartadoActualId, comentariosText)
                         cambiarApartado(apartadoActualId + 1)
                     }
                     true
@@ -48,10 +54,16 @@ class IncoActivity : BaseActivity() {
         cargarPreguntas(apartadoActualId)
     }
 
+    private fun mostrarComentariosDelApartado(apartadoId: Int) {
+        val sharedPreferences = getSharedPreferences("PreferenciasComentarios", Context.MODE_PRIVATE)
+        val comentarios = sharedPreferences.getString("comentarios_$apartadoId", "")
+        findViewById<EditText>(R.id.editTextComentarios).setText(comentarios)
+    }
+
     private fun cambiarApartado(nuevoApartado: Int) {
         apartadoActualId = nuevoApartado
+        mostrarComentariosDelApartado(apartadoActualId)
         cargarPreguntas(apartadoActualId)
-        // Nota: No es necesario modificar la habilitación de los botones aquí ya que usamos BottomNavigationView.
     }
 
     private fun cargarPreguntas(apartadoId: Int) {
@@ -86,6 +98,13 @@ class IncoActivity : BaseActivity() {
             .commit()
     }
 
+    fun guardarComentarios(apartadoId: Int, textoComentarios: String) {
+        val sharedPreferences = getSharedPreferences("PreferenciasComentarios", Context.MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            putString("comentarios_$apartadoId", textoComentarios)
+            apply()
+        }
+    }
     private fun mostrarError(mensaje: String) {
         AlertDialog.Builder(this).apply {
             setTitle("Error")
@@ -104,4 +123,15 @@ class IncoActivity : BaseActivity() {
             setNegativeButton("Cancelar", null)
         }.create().show()
     }
+
+    override fun onPause() {
+        super.onPause()
+        val comentarios = findViewById<EditText>(R.id.editTextComentarios).text.toString()
+        guardarComentarios(apartadoActualId, comentarios)
+    }
+    override fun onResume() {
+        super.onResume()
+        mostrarComentariosDelApartado(apartadoActualId)
+    }
+
 }
