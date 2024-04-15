@@ -3,15 +3,29 @@
     <string name="Password">Contraseña</string>
     <string name="Email">Usuario</string>
     <string name="B_Entrar">Entrar</string>
+    <string name="login_title">Iniciar Sesión</string>
+    <string name="system_description">Sistema integral de información para la gestión de educación superior</string>
     <string name="B_Salir">Cerrar Sesion</string>
     <string name="txt_valor1">Si</string>
     <string name="txt_valor2">No</string>
     <string name="title_activity_areas">AreasActivity</string>
+    <string name="api_key">zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx</string>
+    <string name="base_url">
+ https://9057-201-131-131-222.ngrok-free.app
+    </string>
+    <string name="image_description">Logo_Innovation</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="question_here">Pregunta aquí</string>
+    <string name="yes">SI</string>
+    <string name="no">NO</string>
+    <string name="na">N/A</string>
+    <string name="tomar_foto">Tomar Foto</string>
+    <string name="enter_your_answer_here">Introduce tu respuesta aquí</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

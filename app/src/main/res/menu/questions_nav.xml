@@ -1,19 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/arrow_left"
+        android:id="@+id/btnAnterior"
         android:icon="@drawable/ic_arrow_left"
-        android:title="BACK"
-        android:iconTint="@color/black"
-        />
-
+        android:title="Izquierda" />
     <item
-        android:id="@+id/arrow_right"
+        android:id="@+id/btnSiguiente"
         android:icon="@drawable/ic_arrow_right"
-        android:title="NEXT"
-        android:iconTint="@color/black"
-        />
-
-
-
+        android:title="Derecha" />
 </menu>

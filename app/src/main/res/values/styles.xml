@@ -1,0 +1,29 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:textColorHint">#fff</item>
+    </style>
+
+    <style name="CustomTheme" parent="android:Theme.Holo.NoActionBar">
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetEnd">0dp</item>
+    </style>
+
+    <style name="MyDialogTheme" parent="android:Theme.DeviceDefault.Dialog.Alert" tools:ignore="NewApi">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowMinWidthMajor">70%</item>
+        <item name="android:windowMinWidthMinor">70%</item>
+    </style>
+
+    <!-- Theme without ActionBar shadow (inherits main theme) -->
+    <style name="MyNoActionBarShadowTheme" parent="AppTheme">
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="myDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+</resources>

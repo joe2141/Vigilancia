@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="8dp"
-    app:cardBackgroundColor="#FFFFFF">
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cv_soli"
@@ -30,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvNombrePlantel"
+            android:id="@+id/tvNombreInstitucion"
             android:layout_width="272dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -55,14 +56,14 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvNombrePlantel" />
+            app:layout_constraintTop_toBottomOf="@+id/tvNombreInstitucion" />
 
         <TextView
-            android:id="@+id/Txt_fecha_ins"
+            android:id="@+id/tvfecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
             android:drawablePadding="10dp"
             android:text="Fecha de Inspeccion"
             android:textStyle="bold"
@@ -75,7 +76,7 @@
             android:layout_height="21dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
-            app:layout_constraintStart_toEndOf="@+id/Txt_fecha_ins"
+            app:layout_constraintStart_toEndOf="@+id/tvfecha"
             app:layout_constraintTop_toBottomOf="@+id/tvDirecion"
             app:srcCompat="@drawable/calendario" />
 

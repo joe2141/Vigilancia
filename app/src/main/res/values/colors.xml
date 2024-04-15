@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="azul_sicyt">#0072CE</color>
+    <color name="rojoDebil">#004DB1</color>
+    <color name="grisDebil">#f9f9f9</color>
 </resources>

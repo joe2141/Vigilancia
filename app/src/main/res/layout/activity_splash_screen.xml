@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.vigilancia.activity.Splash_Screen">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fondo_gris" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="106dp"
+                android:layout_above="@+id/laySiiges"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/logos_gobierno_innovacion" />
+
+            <LinearLayout
+                android:id="@+id/laySiiges"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="30dp"
+                    android:alpha=".3"
+                    android:background="@drawable/gradient_shadow"
+                    android:orientation="vertical"></LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/imageView3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="4dp"
+                android:text="Powered by"
+                android:textColor="@color/rojoDebil"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                tools:ignore="UnknownId" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="78dp"
+                android:height="200dp"
+                android:gravity="bottom|center_horizontal"
+                android:lines="2"
+                android:maxLines="2"
+                android:minLines="2"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:text="Sistema Integral de Información para la Gestión de la Educación Superior"
+                android:textColor="@color/grisDebil"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

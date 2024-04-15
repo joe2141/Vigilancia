@@ -9,7 +9,7 @@
         android:id="@+id/tv_pregunta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pregunta aquí" />
+        android:text="@string/question_here" />
 
     <RadioGroup
         android:id="@+id/radio_group"
@@ -23,50 +23,30 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="SI" />
+            android:text="@string/yes" />
 
         <RadioButton
             android:id="@+id/rb_no"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="NO" />
+            android:text="@string/no" />
 
+        <!-- RadioButton para N/A -->
         <RadioButton
             android:id="@+id/rb_na"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="N/A" />
+            android:text="@string/na" />
     </RadioGroup>
 
     <EditText
+        android:autofillHints="name"
         android:id="@+id/edit_multiline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
-        android:hint="Introduce tu respuesta aquí"
+        android:hint="@string/enter_your_answer_here"
         android:visibility="gone" />
-
-    <LinearLayout
-        android:id="@+id/group_photo_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_capture_photo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Tomar foto"/>
-
-        <Button
-            android:id="@+id/btn_view_photo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Ver foto"/>
-    </LinearLayout>
-
 </LinearLayout>
