@@ -4,8 +4,10 @@ import BaseActivity
 import Pregunta
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.lifecycleScope
 import com.example.vigilancia.R
@@ -51,6 +53,13 @@ class IncoActivity : BaseActivity() {
                 }
                 else -> false
             }
+        }
+        val btnTerminar: Button = findViewById(R.id.btnTerminar)
+        btnTerminar.setOnClickListener {
+            // Si necesitas guardar datos antes de cambiar de Activity, hazlo aquí
+            val intent = Intent(this, FinalActivity::class.java)
+            startActivity(intent)
+          //  finish() // Opcional: si no quieres que el usuario vuelva a esta actividad
         }
 
         cargarPreguntas(apartadoActualId)

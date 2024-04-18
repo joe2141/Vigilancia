@@ -44,6 +44,9 @@
         <activity
             android:name=".activity.LoginActivity"
             android:exported="true" />
+        <activity
+            android:name=".activity.FinalActivity"
+            android:exported="true" />
 
     </application>
 </manifest>
